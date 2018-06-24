@@ -7,6 +7,7 @@ package br.com.finances.framework.dao;
 
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +20,7 @@ public class DAOFinderService {
 
     /** Map with all the DAO implementations */
     @Autowired
-    private Map<String, AbstractDAO> implementations;
+    private Map<String, JpaRepository> implementations;
 
     /**
      * Returns the DAO Instance
@@ -28,8 +29,8 @@ public class DAOFinderService {
      * @return AbstractDAO
      * @throws DatabaseException
      */
-    public AbstractDAO get(String entityName) throws DatabaseException {
-        String daoName = entityName.concat("DAO");
+    public JpaRepository get(String entityName) throws DatabaseException {
+        String daoName = entityName.concat("Repository");
         if (!implementations.containsKey(daoName)) {
             throw new DatabaseException("Fail to find class " + daoName, new Exception());
         }

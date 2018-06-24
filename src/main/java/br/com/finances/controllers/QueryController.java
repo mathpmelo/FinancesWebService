@@ -6,7 +6,6 @@
 package br.com.finances.controllers;
 
 import br.com.finances.anotattions.WebServiceAllowed;
-import br.com.finances.framework.dao.AbstractBean;
 import br.com.finances.framework.dao.DatabaseException;
 import br.com.finances.framework.dao.QueryService;
 import java.util.List;
@@ -41,7 +40,7 @@ public class QueryController {
     @RequestMapping(value = "/{entity}", method = RequestMethod.GET)
     public ResponseEntity read(@PathVariable String entity) {
         try {
-            List<AbstractBean> list = query.read(entity, null);
+            List list = query.findAll(entity, null);
             return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (DatabaseException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

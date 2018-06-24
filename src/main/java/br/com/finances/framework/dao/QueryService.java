@@ -7,6 +7,7 @@ package br.com.finances.framework.dao;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,9 +21,9 @@ public class QueryService {
     @Autowired
     private DAOFinderService daoFinder;
 
-    public List<AbstractBean> read(String entityName, String jsonObject) throws DatabaseException {
-        AbstractDAO dao = daoFinder.get(entityName);
-        return dao.read();
+    public List findAll(String entityName, String jsonObject) throws DatabaseException {
+        JpaRepository dao = daoFinder.get(entityName);
+        return dao.findAll();
     }
 
 }
