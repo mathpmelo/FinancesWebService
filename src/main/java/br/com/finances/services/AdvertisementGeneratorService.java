@@ -6,7 +6,6 @@
 package br.com.finances.services;
 
 import br.com.finances.bean.AdBean;
-import br.com.finances.framework.dao.DatabaseConnection;
 import br.com.finances.framework.dao.DatabaseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +21,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdvertisementGeneratorService {
 
-    @Autowired
-    private DatabaseConnection database;
     @Autowired
     protected JsonService js;
 
@@ -57,8 +54,6 @@ public class AdvertisementGeneratorService {
      * @throws br.com.finances.framework.dao.DatabaseException
      */
     public void createNewAd(String json) throws DatabaseException {
-        AdBean ad = js.castTo(json, AdBean.class);
-        database.get().getAd().add(ad);
         if (adsList != null) {
             adsList.add(json);
         }
@@ -101,17 +96,11 @@ public class AdvertisementGeneratorService {
      * @param list
      */
     private void loadAds(List<String> list) {
-        try {
-            // Try to load the ADs from the database
-            database.get().getAd().stream().forEach(ad -> list.add(ad.getMessage()));
-        } catch (DatabaseException ex) {
-            // If can't load from DB, loads some hard-coded ones
-            list.add("Acesse agora o site MercadoLivre.com.br e confira nossas ofertas imperdíveis!!");
-            list.add("Computador barato é só na Kabum!");
-            list.add("Não basta ser bom. Tem que ser LEBOM!!");
-            list.add("É só amanhã nas casas bahia!!");
-            list.add("Hotel?? Trivago :D");
-        }
+        list.add("Acesse agora o site MercadoLivre.com.br e confira nossas ofertas imperdíveis!!");
+        list.add("Computador barato é só na Kabum!");
+        list.add("Não basta ser bom. Tem que ser LEBOM!!");
+        list.add("É só amanhã nas casas bahia!!");
+        list.add("Hotel?? Trivago :D");
     }
 
 }

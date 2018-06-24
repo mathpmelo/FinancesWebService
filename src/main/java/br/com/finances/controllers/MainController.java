@@ -6,7 +6,6 @@
 package br.com.finances.controllers;
 
 import br.com.finances.anotattions.WebServiceAllowed;
-import br.com.finances.framework.dao.DatabaseConnection;
 import br.com.finances.framework.dao.DatabaseException;
 import br.com.finances.services.HealthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,6 @@ public class MainController {
 
     @Autowired
     private HealthService health;
-    @Autowired
-    private DatabaseConnection conn;
 
     /**
      * Returns the WS current status
@@ -41,20 +38,6 @@ public class MainController {
     @RequestMapping(value = "/health", method = RequestMethod.GET)
     public ResponseEntity status() throws DatabaseException {
         return new ResponseEntity<>(health, HttpStatus.OK);
-    }
-
-    /**
-     * Flush Data into database
-     *
-     * @return JSON
-     * @throws DatabaseException
-     */
-    @ResponseBody
-    @WebServiceAllowed
-    @RequestMapping(value = "/flush", method = RequestMethod.POST)
-    public ResponseEntity flush() throws DatabaseException {
-        conn.flush();
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
