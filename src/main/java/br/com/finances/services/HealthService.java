@@ -22,7 +22,7 @@ public class HealthService {
 
     public HealthService() {
         this.startDate = new Date();
-        this.healthStatus = "OK!";
+        this.healthStatus = "OK!CUCUCUC";
         this.databaseConnection = false;
     }
 

@@ -5,9 +5,12 @@
  */
 package br.com.finances.ws.conta;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Model for Conta entity
@@ -26,7 +29,19 @@ public class Conta {
 
     @Column
     private int parcelas;
+    
+    @Column(name = "data_inclusao")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date data;
 
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
+    }
+    
     protected Conta() {
     }
 
